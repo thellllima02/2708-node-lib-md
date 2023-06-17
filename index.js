@@ -1,29 +1,35 @@
 import fs from 'fs';
 import chalk from 'chalk';
+import { error } from 'console';
 
+console.log(chalk.blue("Hello World"));
 
-function tratarErro(erro){
+function trataErro(erro){
+    //Mostrar qual o erro
     console.log(erro);
-    throw new Error(chalk.red(erro.code, "Não há arquivos no diretorio"));
+    //lançar,mostrar           todo erro tem um código
+    throw new Error(chalk.red(erro.code , 'não há arquivo no diretório'));
 }
 
-function pegaArquivo(cominhoDoArquivo){
+//Código assíngrono tipo 1
+function pegaArquivo(caminhoDoArquivo){
     const encoding = 'utf-8';
     fs.promises
-      .readFile(cominhoDoArquivo, encoding)
-      .then((texto) => console.log(chalk.green(texto)))
-      .catch(tratarErro)
+     .readFile(caminhoDoArquivo, encoding )
+     .then((texto)=>console.log(chalk.green(texto)))
+     .catch(trataErro)
 }
 
-// function pegaArquivo(caminhoDoArquivo){
-//     const encoding = "utf-8";
+//Código síncrono 
+// function pegaArquivo (caminhoDoArquivo){
+//     const encoding = 'utf-8';
+//     //Ler um arquivo,buscar um arquivo
 //     fs.readFile(caminhoDoArquivo, encoding, (erro, texto)=>{
 //         if(erro){
-//             tratarErro(erro);
+//             trataErro(erro);
 //         }
 //         console.log(chalk.green(texto));
 //     })
 // }
 
 pegaArquivo('./arquivos/texto.md');
-//console.log(chalk.yellow("Olá, Mundo!"));
